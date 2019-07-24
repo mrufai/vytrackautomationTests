@@ -58,16 +58,13 @@ public class DateAndTimeTests extends TestBase {
         String expectedtoday=driver.findElement(By.xpath(endlocator)).getText();
         SeleniumUtils.wait(1);
         Assert.assertEquals(actualtoday,expectedtoday);
-        Driver.closeDriver();
-
-
-
-
-
 
     }
 
+    public void endTimeAutoAdjustTest2(){
 
+
+    }
 
 }
 

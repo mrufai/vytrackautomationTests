@@ -2,6 +2,8 @@ package com.vytrack.utilities;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 
 import java.util.concurrent.TimeUnit;
 
@@ -10,7 +12,7 @@ public class TestBase {
     private WebDriver driver;
     private Actions action;
 
-
+@BeforeMethod
     public void setup(){
         driver=Driver.getDriver();
         action=new Actions(driver);
@@ -20,7 +22,7 @@ public class TestBase {
     }
 
 
-
+@AfterMethod
     public void teardown(){
         Driver.closeDriver();
     }
