@@ -19,18 +19,21 @@ public class DateAndTimeTests extends TestBase {
     private String startDatelocator="/html[1]/body[1]/div[2]/div[2]/div[1]/div[2]/div[3]/form[1]/div[2]/div[2]/div[1]/div[1]/div[2]/div[1]/fieldset[1]/div[2]/div[1]/div[1]/div[2]/div[1]/input[1]";
     private String endlocator="/html[1]/body[1]/div[2]/div[2]/div[1]/div[2]/div[3]/form[1]/div[2]/div[2]/div[1]/div[1]/div[2]/div[1]/fieldset[1]/div[2]/div[1]/div[2]/div[2]/div[1]/input[1]";
     private String Todaybutton="#ui-datepicker-div > div.ui-datepicker-buttonpane.ui-widget-content > button.ui-datepicker-current.ui-state-default.ui-priority-secondary.ui-corner-all";
+    private String TimeStrtLocator="/html[1]/body[1]/div[2]/div[2]/div[1]/div[2]/div[3]/form[1]/div[2]/div[2]/div[1]/div[1]/div[2]/div[1]/fieldset[1]/div[2]/div[1]/div[1]/div[2]/div[1]/input[2]";
+    private String TimeendLocator="/html[1]/body[1]/div[2]/div[2]/div[1]/div[2]/div[3]/form[1]/div[2]/div[2]/div[1]/div[1]/div[2]/div[1]/fieldset[1]/div[2]/div[1]/div[2]/div[2]/div[1]/input[2]";
 
 
+    private String username= ConfigurationReader.getProperty("Storusername");
+    private String password=ConfigurationReader.getProperty("password");
+
+    Actions action =new Actions(driver);
 
 
-    @Test
+    @Test(priority = 1,description = "date equality test")
     public void endDateAutoAdjustTest1(){
-        Actions action =new Actions(driver);
 
-        String username= ConfigurationReader.getProperty("Storusername");
-        String password=ConfigurationReader.getProperty("password");
         LoginPage.login(driver,username,password);
-        driver.manage().window().maximize();
+        //driver.manage().window().maximize();
         driver.findElement(By.xpath(Activitieslocator)).click();
         SeleniumUtils.wait(2);
         driver.findElement(By.xpath(CalenderEventslocatr)).click();
@@ -60,11 +63,29 @@ public class DateAndTimeTests extends TestBase {
         Assert.assertEquals(actualtoday,expectedtoday);
 
     }
-
+@Test(priority = 2,description = "time equalty test")
     public void endTimeAutoAdjustTest2(){
 
+    LoginPage.login(driver,username,password);
+    driver.findElement(By.xpath(Activitieslocator)).click();
+    SeleniumUtils.wait(2);
+    driver.findElement(By.xpath(CalenderEventslocatr)).click();
+    SeleniumUtils.wait(2);
+    driver.findElement(By.cssSelector(createlocator)).click();
+    SeleniumUtils.wait(2);
+    driver.findElement(By.xpath(TimeStrtLocator)).click();
+    SeleniumUtils.wait(2);
+    driver.findElement(By.xpath(TimeStrtLocator)).clear();
+    SeleniumUtils.wait(2);
+    driver.findElement(By.xpath(TimeStrtLocator)).sendKeys("12:30 PM");
+    SeleniumUtils.wait(2);
+    driver.findElement(By.xpath(TimeStrtLocator)).sendKeys(Keys.ENTER);
+    SeleniumUtils.wait(2);
+    String actualtime =driver.findElement(By.xpath(TimeendLocator)).getText();
 
-    }
+
+
+}
 
 }
 
